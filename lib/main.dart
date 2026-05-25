@@ -10,10 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Presentación aprendiz",
-      home: Mascota(),
+      // title: "Presentación aprendiz",
+      // home: Mascota(),
       // home: Scaffold(
-
       //   // appBar: AppBar(
       //   //   title: Text(
       //   //     "Esto es una prueba",
@@ -90,7 +89,7 @@ class MyApp extends StatelessWidget {
       //   //   //   ),
       //   //   // ),
 
-      //   //   // child: Column(
+      //  child: Column(
       //   //   //   children: [
       //   //   //     Text(
       //   //   //       "Este es el cuerpo de la App",
@@ -204,313 +203,411 @@ class MyApp extends StatelessWidget {
       //   // ),
       // ),
       debugShowCheckedModeBanner: false,
+      home: Asistencia(),
     );
   }
 }
 
-class Presentacion extends StatelessWidget {
-  const Presentacion({super.key});
+class Contador extends StatefulWidget {
+  const Contador({super.key});
+
+  @override
+  State<Contador> createState() => _ContadorState();
+}
+
+class _ContadorState extends State<Contador> {
+  int contador = 0;
+
+  void aumentar() {
+    setState(() {
+      contador++;
+    });
+  }
+
+  void decrementar() {
+    setState(() {
+      contador--;
+    });
+  }
+
+  void reiniciar() {
+    setState(() {
+      contador = 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Mi presentación"), centerTitle: true),
+      appBar: AppBar(title: Text("Contador Básico")),
       body: Center(
-        child: Container(
-          padding: EdgeInsets.all(20),
-          width: 310,
-          decoration: BoxDecoration(
-            color: Colors.green.shade100,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.green, width: 2),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.person, size: 90, color: Colors.red),
-              SizedBox(height: 20),
-              Text(
-                "Mi nombre es Juan",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        child: Column(
+          children: [
+            Text(
+              '$contador',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 20),
-              Text(
-                "Soy aprendiz de ADSO",
-                style: TextStyle(fontSize: 16),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.location_city, color: Colors.green),
-                  SizedBox(width: 8),
-                  Text("SENA", style: TextStyle(fontSize: 16)),
-                ],
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: .center,
+              children: [
+                ElevatedButton(onPressed: decrementar, child: Text("-")),
+                SizedBox(width: 10),
+                ElevatedButton(onPressed: aumentar, child: Text("+")),
+                SizedBox(width: 10),
+                ElevatedButton(onPressed: reiniciar, child: Text("Reinciar")),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class Lista extends StatelessWidget {
-  const Lista({super.key});
+class Mensaje extends StatefulWidget {
+  const Mensaje({super.key});
 
-  final List<String> temas = const [
-    'Flutter',
-    'Dart',
-    'Widget',
-    'Text',
-    'Row',
-    'Columns',
-    'Icons',
-    'Colors',
-    'Listas',
-    'Flutter',
-    'Dart',
-    'Widget',
-    'Text',
-    'Row',
-    'Columns',
-    'Icons',
-    'Colors',
-    'Listas',
-    'Flutter',
-    'Dart',
-    'Widget',
-    'Text',
-    'Row',
-    'Columns',
-    'Icons',
-    'Colors',
-    'Listas',
+  @override
+  State<Mensaje> createState() => _MensajeState();
+}
+
+class _MensajeState extends State<Mensaje> {
+  String mens = "Este es el mensaje inicial";
+
+  void cambiarMensaje() {
+    setState(() {
+      mens = "Se cambió el mensaje";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Cambio de mensaje")),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              mens,
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 15),
+            ElevatedButton(onPressed: cambiarMensaje, child: Text("Cambiar")),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Caja extends StatefulWidget {
+  const Caja({super.key});
+
+  @override
+  State<Caja> createState() => _CajaState();
+}
+
+class _CajaState extends State<Caja> {
+  Color ColorCaja = Colors.blue;
+  String nombreColor = "Azul";
+
+  void CambiarRojo() {
+    setState(() {
+      ColorCaja = Colors.red;
+      nombreColor = "Rojo";
+    });
+  }
+
+  void CambiarVerde() {
+    setState(() {
+      ColorCaja = Colors.green;
+      nombreColor = "Verde";
+    });
+  }
+
+  void CambiarAmarillo() {
+    setState(() {
+      ColorCaja = Colors.yellow;
+      nombreColor = "Amarillo";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Color de la Caja"),
+        backgroundColor: Colors.blue,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                color: ColorCaja,
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              nombreColor,
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(onPressed: CambiarAmarillo, child: Text("Amarillo")),
+            ElevatedButton(onPressed: CambiarRojo, child: Text("Rojo")),
+            ElevatedButton(onPressed: CambiarVerde, child: Text("Verde")),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MostrarOcultar extends StatefulWidget {
+  const MostrarOcultar({super.key});
+
+  @override
+  State<MostrarOcultar> createState() => _MostrarOcultarState();
+}
+
+class _MostrarOcultarState extends State<MostrarOcultar> {
+  bool mostrarTexto = false;
+
+  void cambiarVisibilidad() {
+    setState(() {
+      mostrarTexto = !mostrarTexto;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Mostrar u ocultar Texto"),
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.info, size: 24, color: Colors.blueAccent),
+            SizedBox(height: 25),
+            if (mostrarTexto)
+              const Text(
+                "Ejemplo de mostrar texto con Stateful Widget",
+                style: TextStyle(
+                  color: Colors.teal,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+            ElevatedButton(
+              onPressed: cambiarVisibilidad,
+              child: Text(
+                mostrarTexto ? 'Ocultar información' : 'Mostrar información',
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Nombre extends StatefulWidget {
+  const Nombre({super.key});
+
+  @override
+  State<Nombre> createState() => _NombreState();
+}
+
+class _NombreState extends State<Nombre> {
+  final TextEditingController nombreController = TextEditingController();
+
+  String saludo = "Escribe tu nombre";
+
+  void mostrarSaludo() {
+    setState(() {
+      saludo = "Hola ${nombreController.text}";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Saludar"), backgroundColor: Colors.teal),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: nombreController,
+              decoration: InputDecoration(
+                labelText: "Nombre",
+                prefixIcon: Icon(Icons.person),
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 20,),
+            ElevatedButton(onPressed: mostrarSaludo, child: Text("Saludar")),
+            Text(saludo, style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+//Los ejercicios empiezan aquí
+class Puntos extends StatefulWidget {
+  const Puntos({super.key});
+
+  @override
+  State<Puntos> createState() => _PuntosState();
+}
+
+class _PuntosState extends State<Puntos> {
+  int puntos = 0;
+
+  void sumarPuntos() {
+    setState(() {
+      puntos++;
+    });
+  }
+
+  void restarPuntos() {
+    setState(() {
+      puntos--;
+    });
+  }
+
+  void reiniciarPuntos() {
+    setState(() {
+      puntos = 0;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Contador de Puntos")),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Puntaje actual: $puntos",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: restarPuntos,
+                  child: Text("-"),
+                ),
+
+                SizedBox(width: 10),
+
+                ElevatedButton(
+                  onPressed: sumarPuntos,
+                  child: Text("+"),
+                ),
+
+                SizedBox(width: 10),
+
+                ElevatedButton(
+                  onPressed: reiniciarPuntos,
+                  child: Text("Reiniciar"),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Motivacion extends StatefulWidget {
+  const Motivacion({super.key});
+
+  @override
+  State<Motivacion> createState() => _MotivacionState();
+}
+
+class _MotivacionState extends State<Motivacion> {
+  String mensaje = "Presiona el botón";
+
+  List<String> mensajes = [
+    "Sigue practicando",
+    "Vas muy bien",
+    "No te rindas",
+    "Cada error también enseña"
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Lista sencilla",
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: ListView.builder(
-        itemCount: temas.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Icon(Icons.check_circle, color: Colors.green, size: 15),
-            title: Text(temas[index]),
-          );
-        },
-      ),
-    );
+  int indice = 0;
+
+  void cambiarMensaje() {
+    setState(() {
+      mensaje = mensajes[indice];
+
+      indice++;
+
+      if (indice >= mensajes.length) {
+        indice = 0;
+      }
+    });
   }
-}
-
-class Cursos extends StatelessWidget {
-  const Cursos({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Catálogo de Cursos",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-        ),
-        backgroundColor: Colors.green,
-      ),
-      body: SingleChildScrollView(
+      appBar: AppBar(title: Text("Mensajes Motivacionales")),
+
+      body: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Cursos Disponibles",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "Seleccione un curso de su interes, para fortalecer sus habilidades",
-              style: TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
+              mensaje,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
               ),
             ),
+
             SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.web, color: Colors.red, size: 40),
-                title: Text("Aplicaciones Web", style: TextStyle(fontSize: 16)),
-                subtitle: Text("Aprende a crear aplicaiones web"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(
-                  Icons.phone_android,
-                  color: Colors.blue,
-                  size: 40,
-                ),
-                title: Text(
-                  "Aplicaciones Movil",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende a crear aplicaiones apps"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: Icon(Icons.code, color: Colors.green, size: 40),
-                title: Text(
-                  "Fundamentos de Programación",
-                  style: TextStyle(fontSize: 16),
-                ),
-                subtitle: Text("Aprende temas de lógica y variables"),
-              ),
-            ),
-            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: cambiarMensaje,
+              child: Text("Cambiar mensaje"),
+            )
           ],
         ),
       ),
@@ -518,102 +615,69 @@ class Cursos extends StatelessWidget {
   }
 }
 
-class Mascota extends StatelessWidget {
-  const Mascota({super.key});
+class TarjetaColor extends StatefulWidget {
+  const TarjetaColor({super.key});
+
+  @override
+  State<TarjetaColor> createState() => _TarjetaColorState();
+}
+
+class _TarjetaColorState extends State<TarjetaColor> {
+  Color colorTarjeta = Colors.blue;
+
+  void cambiarAzul() {
+    setState(() {
+      colorTarjeta = Colors.blue;
+    });
+  }
+
+  void cambiarVerde() {
+    setState(() {
+      colorTarjeta = Colors.green;
+    });
+  }
+
+  void cambiarRojo() {
+    setState(() {
+      colorTarjeta = Colors.red;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Perfil de Mascotas"),
-        backgroundColor: Colors.orange,
+        title: Text("Cambiar Color Tarjeta"),
       ),
-      body: SingleChildScrollView(
+
+      body: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-           CircleAvatar(
-            radius: 100, backgroundImage: (NetworkImage("data:image/webp;base64,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")),),
-            // Icon(Icons.pets, size: 100, color: Colors.orange),
-            SizedBox(height: 20),
-            Text("Axel", style: TextStyle(fontSize: 18, color: Colors.grey)),
-            Text(
-              "Raza: Pitbull",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-            SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Text(
-                      "Información General",
-                      style: TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.monitor_weight,
-                          color: Colors.orange,
-                          size: 30,
-                        ),
-                        SizedBox(width: 10),
-                        Text("Peso: 24kg"),
-                      ],
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      children: [
-                        Icon(Icons.cake, color: Colors.orange, size: 30),
-                        SizedBox(width: 10),
-                        Text("Edad: 3 años"),
-                      ],
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      children: [
-                        Icon(Icons.favorite, color: Colors.orange, size: 30),
-                        SizedBox(width: 10),
-                        Text("Estado: Saludable"),
-                      ],
-                    ),
-                  ],
-                ),
+            Container(
+              width: 250,
+              height: 150,
+              decoration: BoxDecoration(
+                color: colorTarjeta,
+                borderRadius: BorderRadius.circular(15),
               ),
             ),
+
             SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: Column(
-                children: [
-                  Text(
-                    "Cuidados Importantes",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 15),
-                ListTile(
-                  leading: Icon(Icons.water_drop, color: Colors.blue,size: 25,),
-                  title: Text("Mantener Agua Limpia y Fresca"),
-                ),
-                ListTile(
-                  leading: Icon(Icons.restart_alt, color:  Colors.green,size: 25,),
-                  title: Text("Dar el Alimento en los Horarios Establecidos"),
-                ),
-                ListTile(
-                  leading: Icon(Icons.directions_walk, color:  Colors.brown,size: 25,),
-                  title: Text("Recorre Espacios Abiertos y Caminatas Largas"),
-                ),
-                ListTile(
-                  leading: Icon(Icons.health_and_safety, color:  Colors.red,size: 25,),
-                  title: Text("Asistir a Controles Regularmente"),
-                )
-                ],
-              ),
+
+            ElevatedButton(
+              onPressed: cambiarAzul,
+              child: Text("Azul"),
+            ),
+
+            ElevatedButton(
+              onPressed: cambiarVerde,
+              child: Text("Verde"),
+            ),
+
+            ElevatedButton(
+              onPressed: cambiarRojo,
+              child: Text("Rojo"),
             ),
           ],
         ),
@@ -621,3 +685,615 @@ class Mascota extends StatelessWidget {
     );
   }
 }
+
+class FlutterInfo extends StatefulWidget {
+  const FlutterInfo({super.key});
+
+  @override
+  State<FlutterInfo> createState() => _FlutterInfoState();
+}
+
+class _FlutterInfoState extends State<FlutterInfo> {
+  bool mostrar = false;
+
+  void cambiarEstado() {
+    setState(() {
+      mostrar = !mostrar;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Información de Flutter"),
+      ),
+
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(
+              "¿Qué es Flutter?",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            if (mostrar)
+              Text(
+                "Flutter es un framework de Google para crear aplicaciones móviles, web y escritorio con una sola base de código.",
+                style: TextStyle(fontSize: 18),
+              ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: cambiarEstado,
+              child: Text(
+                mostrar
+                    ? "Ocultar información"
+                    : "Mostrar información",
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Formulario extends StatefulWidget {
+  const Formulario({super.key});
+
+  @override
+  State<Formulario> createState() => _FormularioState();
+}
+
+class _FormularioState extends State<Formulario> {
+  final TextEditingController nombreController =
+      TextEditingController();
+
+  final TextEditingController programaController =
+      TextEditingController();
+
+  final TextEditingController ciudadController =
+      TextEditingController();
+
+  String resultado = "";
+
+  void mostrarInformacion() {
+    setState(() {
+      resultado =
+          "Hola, ${nombreController.text}. "
+          "Estudias ${programaController.text} "
+          "y vives en ${ciudadController.text}.";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Formulario")),
+
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: nombreController,
+              decoration: InputDecoration(
+                labelText: "Nombre",
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            SizedBox(height: 15),
+
+            TextField(
+              controller: programaController,
+              decoration: InputDecoration(
+                labelText: "Programa",
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            SizedBox(height: 15),
+
+            TextField(
+              controller: ciudadController,
+              decoration: InputDecoration(
+                labelText: "Ciudad",
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: mostrarInformacion,
+              child: Text("Mostrar"),
+            ),
+
+            SizedBox(height: 20),
+
+            Text(
+              resultado,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Asistencia extends StatefulWidget {
+  const Asistencia({super.key});
+
+  @override
+  State<Asistencia> createState() => _AsistenciaState();
+}
+
+class _AsistenciaState extends State<Asistencia> {
+  bool asistencia = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Confirmar Asistencia"),
+      ),
+
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            CheckboxListTile(
+              title: Text("Confirmar asistencia"),
+              value: asistencia,
+              onChanged: (value) {
+                setState(() {
+                  asistencia = value!;
+                });
+              },
+            ),
+
+            SizedBox(height: 20),
+
+            Text(
+              asistencia
+                  ? "Asistencia confirmada"
+                  : "Asistencia pendiente",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+// class Presentacion extends StatelessWidget {
+//   const Presentacion({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text("Mi presentación"), centerTitle: true),
+//       body: Center(
+//         child: Container(
+//           padding: EdgeInsets.all(20),
+//           width: 310,
+//           decoration: BoxDecoration(
+//             color: Colors.green.shade100,
+//             borderRadius: BorderRadius.circular(20),
+//             border: Border.all(color: Colors.green, width: 2),
+//           ),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               Icon(Icons.person, size: 90, color: Colors.red),
+//               SizedBox(height: 20),
+//               Text(
+//                 "Mi nombre es Juan",
+//                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+//               ),
+//               SizedBox(height: 20),
+//               Text(
+//                 "Soy aprendiz de ADSO",
+//                 style: TextStyle(fontSize: 16),
+//                 textAlign: TextAlign.center,
+//               ),
+//               SizedBox(height: 25),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: [
+//                   Icon(Icons.location_city, color: Colors.green),
+//                   SizedBox(width: 8),
+//                   Text("SENA", style: TextStyle(fontSize: 16)),
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class Lista extends StatelessWidget {
+//   const Lista({super.key});
+
+//   final List<String> temas = const [
+//     'Flutter',
+//     'Dart',
+//     'Widget',
+//     'Text',
+//     'Row',
+//     'Columns',
+//     'Icons',
+//     'Colors',
+//     'Listas',
+//     'Flutter',
+//     'Dart',
+//     'Widget',
+//     'Text',
+//     'Row',
+//     'Columns',
+//     'Icons',
+//     'Colors',
+//     'Listas',
+//     'Flutter',
+//     'Dart',
+//     'Widget',
+//     'Text',
+//     'Row',
+//     'Columns',
+//     'Icons',
+//     'Colors',
+//     'Listas',
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(
+//           "Lista sencilla",
+//           style: TextStyle(
+//             fontSize: 16,
+//             color: Colors.red,
+//             fontWeight: FontWeight.bold,
+//           ),
+//         ),
+//       ),
+//       body: ListView.builder(
+//         itemCount: temas.length,
+//         itemBuilder: (context, index) {
+//           return ListTile(
+//             leading: Icon(Icons.check_circle, color: Colors.green, size: 15),
+//             title: Text(temas[index]),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+// class Cursos extends StatelessWidget {
+//   const Cursos({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(
+//           "Catálogo de Cursos",
+//           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+//         ),
+//         backgroundColor: Colors.green,
+//       ),
+//       body: SingleChildScrollView(
+//         child: Column(
+//           children: [
+//             Text(
+//               "Cursos Disponibles",
+//               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+//             ),
+//             SizedBox(height: 20),
+//             Text(
+//               "Seleccione un curso de su interes, para fortalecer sus habilidades",
+//               style: TextStyle(fontSize: 18),
+//               textAlign: TextAlign.center,
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.web, color: Colors.red, size: 40),
+//                 title: Text("Aplicaciones Web", style: TextStyle(fontSize: 16)),
+//                 subtitle: Text("Aprende a crear aplicaiones web"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(
+//                   Icons.phone_android,
+//                   color: Colors.blue,
+//                   size: 40,
+//                 ),
+//                 title: Text(
+//                   "Aplicaciones Movil",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende a crear aplicaiones apps"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: ListTile(
+//                 leading: Icon(Icons.code, color: Colors.green, size: 40),
+//                 title: Text(
+//                   "Fundamentos de Programación",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 subtitle: Text("Aprende temas de lógica y variables"),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class Mascota extends StatelessWidget {
+//   const Mascota({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Perfil de Mascotas"),
+//         backgroundColor: Colors.orange,
+//       ),
+//       body: SingleChildScrollView(
+//         child: Column(
+//           children: [
+//            CircleAvatar(
+//             radius: 100, backgroundImage: (NetworkImage("data:image/webp;base64,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")),),
+//             // Icon(Icons.pets, size: 100, color: Colors.orange),
+//             SizedBox(height: 20),
+//             Text("Axel", style: TextStyle(fontSize: 18, color: Colors.grey)),
+//             Text(
+//               "Raza: Pitbull",
+//               style: TextStyle(fontSize: 18, color: Colors.grey),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: Padding(
+//                 padding: const EdgeInsets.all(16),
+//                 child: Column(
+//                   children: [
+//                     Text(
+//                       "Información General",
+//                       style: TextStyle(
+//                         fontSize: 19,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                     SizedBox(height: 15),
+//                     Row(
+//                       children: [
+//                         Icon(
+//                           Icons.monitor_weight,
+//                           color: Colors.orange,
+//                           size: 30,
+//                         ),
+//                         SizedBox(width: 10),
+//                         Text("Peso: 24kg"),
+//                       ],
+//                     ),
+//                     SizedBox(height: 15),
+//                     Row(
+//                       children: [
+//                         Icon(Icons.cake, color: Colors.orange, size: 30),
+//                         SizedBox(width: 10),
+//                         Text("Edad: 3 años"),
+//                       ],
+//                     ),
+//                     SizedBox(height: 15),
+//                     Row(
+//                       children: [
+//                         Icon(Icons.favorite, color: Colors.orange, size: 30),
+//                         SizedBox(width: 10),
+//                         Text("Estado: Saludable"),
+//                       ],
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             Card(
+//               elevation: 4,
+//               child: Column(
+//                 children: [
+//                   Text(
+//                     "Cuidados Importantes",
+//                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+//                   ),
+//                   SizedBox(height: 15),
+//                 ListTile(
+//                   leading: Icon(Icons.water_drop, color: Colors.blue,size: 25,),
+//                   title: Text("Mantener Agua Limpia y Fresca"),
+//                 ),
+//                 ListTile(
+//                   leading: Icon(Icons.restart_alt, color:  Colors.green,size: 25,),
+//                   title: Text("Dar el Alimento en los Horarios Establecidos"),
+//                 ),
+//                 ListTile(
+//                   leading: Icon(Icons.directions_walk, color:  Colors.brown,size: 25,),
+//                   title: Text("Recorre Espacios Abiertos y Caminatas Largas"),
+//                 ),
+//                 ListTile(
+//                   leading: Icon(Icons.health_and_safety, color:  Colors.red,size: 25,),
+//                   title: Text("Asistir a Controles Regularmente"),
+//                 )
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
